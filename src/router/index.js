@@ -12,19 +12,21 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/TBR',
+      path: '/tbr',
       name: 'tbr',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/TBRView.vue')
+      component: () => import('../views/TBRView.vue'),
+      meta: { requiresAuth:true }
     },
 
     {
       path: '/read',
       name: 'read',
 
-      component: () => import('../views/ReadView.vue')
+      component: () => import('../views/ReadView.vue'),
+      meta: { requiresAuth:true }
     }
   ]
 })

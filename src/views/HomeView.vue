@@ -12,7 +12,7 @@
 </div>
 
 <div class="login-container">
-    <h2>Login</h2>
+    <h2>LogIn</h2>
     <form @submit.prevent="loginUser">
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
@@ -32,8 +32,8 @@
           required
         />
       </div>
-      <button v-if="!user" @click="login('BookEase@admin.com', '123456')">Login</button>
-        <button v-if="user" @click="logout">Logout</button>
+      <button class="login-btn" v-if="!user" @click="login('BookEase@admin.com', '123456')">Login</button>
+        <button class="login-btn" v-if="user" @click="logout">Logout</button>
         <p v-if="user">Logged in as: {{ user.email }}</p>
     </form>
     <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
@@ -86,4 +86,22 @@ const { user, login, logout } = logIn()
       padding: 10px;
     }
   
+  .login-container {
+    margin:auto;
+    margin-bottom: 20px;
+    width: 50%;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  .login-btn {
+    background-color: rosybrown;
+    color: white;
+    padding: 10px 20px;
+  
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
 </style>

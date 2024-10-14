@@ -16,7 +16,7 @@
                     <RouterLink class="nav-link" to="/">Home</RouterLink>
                     </li>
                     <li class="nav-item">
-                    <RouterLink class="nav-link" to="/about">TBR</RouterLink>
+                    <RouterLink class="nav-link" to="/tbr">TBR</RouterLink>
                      </li>
                     <li class="nav-item">
                      <RouterLink class="nav-link" to="/read">Read</RouterLink>
@@ -25,7 +25,7 @@
                 </ul>
             
             </div>
-            <button type="button" class="btn btn-light">Login</button>
+            
 
   </div>
 </nav>
