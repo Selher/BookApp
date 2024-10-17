@@ -99,8 +99,8 @@ const { user, login, logout } = logIn()
     background-color: rosybrown;
     color: white;
     padding: 10px 20px;
-  
     border-radius: 5px;
+    border:none;
     cursor: pointer;
   }
 

@@ -26,10 +26,9 @@ const auth = getAuth(app);
 
 
 // reference to the collection
-const booksFirebaseCollectionRef = 'books';
-const booksCollection = collection(db, booksFirebaseCollectionRef);
+const booksCollection = collection(db, 'books');
 
-export {db, booksCollection, booksFirebaseCollectionRef, auth};
+export {db, booksCollection, auth};
 
 
 
