@@ -16,11 +16,12 @@
                     <RouterLink class="nav-link" to="/">Home</RouterLink>
                     </li>
                     <li class="nav-item">
-                    <RouterLink class="nav-link" to="/tbr">TBR</RouterLink>
-                     </li>
-                    <li class="nav-item">
                      <RouterLink class="nav-link" to="/read">Read</RouterLink>
                     </li>
+                    <li class="nav-item">
+                    <RouterLink class="nav-link" to="/tbr">TBR</RouterLink>
+                     </li>
+                   
             
                 </ul>
             
