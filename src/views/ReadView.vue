@@ -1,6 +1,7 @@
 <template>
   
-    <h1 class="add-h1">Your Read Books</h1>
+  
+   <h1 class="add-h1">Your Read Books</h1>
     <p class="add-p">Add a Book</p>
 
     <!-- Input fields for adding a new book -->
@@ -22,33 +23,43 @@
 
   <h1 class="add-h1">See All</h1>
 
-
-    <!-- Display the list of books -->
-    <ul>
-      <li v-for="book in books" :key="book.id">
-        <strong>ID:</strong> {{ book.id }}<br>
+  
+      <!-- Display the list of books -->
+      <div class="book-card" v-for="book in books" :key="book.id">
+        <img v-if="book.imageUrl" :src="book.imageUrl" alt="Book cover" class="book-cover" />
         <strong>Title:</strong> {{ book.title }}<br>
         <strong>Author:</strong> {{ book.author }}
-      </li>
-    </ul>
+      </div>
 
+
+
+   
  
 </template>
 
 <script setup>
-import { books } from '../modules/books.js';
+
+import { books as useBooks  } from '../modules/books.js';
+
 
 // Get the data and methods from the books module
 const {
+  books,
   newBookTitle,
   newAuthor,
+  
   addBook
-} = books();
+} = useBooks();
+
+// Add a new ref for image URL in `addBook` function
+// const newImageUrl = ref(''); // Commented out to avoid redeclaration
+
+
 </script>
 
 <style scoped>
 
-.add-h1{
+.add-h1 {
   text-align: center;
   font-size: 35px;
   margin-top: 20px;
@@ -82,5 +93,39 @@ input {
   cursor: pointer;
 }
 
+/* Styling for the Book List Component */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+
+}
+.book-list {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.book-card {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+ 
+
+}
+.book-cover {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+  border-radius: 5px;
+}
 </style>
  

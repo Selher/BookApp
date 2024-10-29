@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue';
 import { booksCollection } from './firebase'; // Ensure this imports your Firestore collection correctly
-import { onSnapshot, addDoc, getDocs } from 'firebase/firestore';
+import { onSnapshot, addDoc, } from 'firebase/firestore';
 
 export const books = () => {
   // Step 1: Create refs for new book title and author
@@ -11,10 +11,10 @@ export const books = () => {
   const books = ref([]);
 
   // Step 3: Fetch all books from Firestore and update the books list
-  const fetchBooks = async () => {
+ /*  const fetchBooks = async () => {
     const booksDocs = await getDocs(booksCollection);
     books.value = booksDocs.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  };
+  }; */
 
   // Step 4: Use onMounted to get real-time updates and fetch books
   onMounted(() => {
@@ -23,21 +23,25 @@ export const books = () => {
         id: doc.id,
         ...doc.data() // Spread operator to merge the id and document data
       }));
+     
     });
-    fetchBooks();
+   
   });
 
   // Step 5: Add a new book to Firestore
-  const addBook = async () => {
-    if (newBookTitle.value.trim() === '' || newAuthor.value.trim() === '') return;
+  const addBook = async (newAuthor, newBookTitle, newImageUrl) => {
+    if (newBookTitle.value.trim() === '' || newAuthor.value.trim() === '' || newImageUrl.value.trim() ==='') return;
 
     await addDoc(booksCollection, {
       title: newBookTitle.value,
       author: newAuthor.value,
+      imageUrl: newImageUrl.value.trim() || null,
+
     });
 
     newBookTitle.value = ''; // Clear the input fields after adding
     newAuthor.value = '';
+    newImageUrl.value = '';
   };
 
   // Step 6: Return the state and actions
@@ -45,7 +49,8 @@ export const books = () => {
     newBookTitle,
     newAuthor,
     books,
-    addBook
+    addBook,
+    
   };
 };
   

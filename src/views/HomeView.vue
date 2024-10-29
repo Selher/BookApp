@@ -32,7 +32,7 @@
           required
         />
       </div>
-      <button class="login-btn" v-if="!user" @click="login('BookEase@admin.com', '123456')">Login</button>
+      <button class="login-btn" v-if="!user" @click="login(email, password)">Login</button>
         <button class="login-btn" v-if="user" @click="logout">Logout</button>
         <p v-if="user">Logged in as: {{ user.email }}</p>
     </form>
@@ -50,9 +50,11 @@
 </template>
 
 <script setup>
-import {logIn} from '../modules/logIn.js'
 
-const { user, login, logout } = logIn()
+import {logIn} from '../modules/logIn'
+
+const { user, login, logout, email, password, errorMessage } = logIn()
+
 
 </script>
 

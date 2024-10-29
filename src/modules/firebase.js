@@ -1,25 +1,27 @@
 
 
 
-import { getFirestore, collection,
-} from 'firebase/firestore';
 
 
 // my apps firebase config
 import { initializeApp } from 'firebase/app';
 
+import { getFirestore, collection,
+} from 'firebase/firestore';
+
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyA3DWBQ_VfquVTR7_8D3I3xaESmhf2sd-c",
+  authDomain: "bookapp-e54b9.firebaseapp.com",
+  projectId: "bookapp-e54b9",
+  storageBucket: "bookapp-e54b9.appspot.com",
+  messagingSenderId: "58865368208",
+  appId: "1:58865368208:web:83170b4ecddb0bd2edac15"
   };
 
 // initialize firebase app
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
