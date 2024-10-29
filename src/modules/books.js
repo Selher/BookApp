@@ -7,6 +7,7 @@ export const books = () => {
   const newBookTitle = ref('');
   const newAuthor = ref('');
   const newImageUrl = ref('');
+  const newRating = ref(0);
 
   // Step 2: Create a ref to store the list of books
   const books = ref([]);
@@ -24,7 +25,8 @@ export const books = () => {
         .map(doc => ({
           id: doc.id,
           ...doc.data(), // Spread operator to merge the id and document data
-         
+         isEditing: false, // add isediting property status
+         tempRating: doc.data().rating, // temporary rating to for editing
         }))
         
      
@@ -40,12 +42,14 @@ export const books = () => {
       title: newBookTitle.value,
       author: newAuthor.value,
       imageUrl: newImageUrl.value.trim() || null,
+      rating:newRating.value,
       hidden: false,
     });
 
     newBookTitle.value = ''; // Clear the input fields after adding
     newAuthor.value = '';
     newImageUrl.value = '';
+    newRating.value = 0;
   };
   const hideBook = async (id) => {
     const bookDoc = doc(booksCollection, id);
@@ -56,17 +60,30 @@ export const books = () => {
     const bookDoc = doc(booksCollection, id);
     await updateDoc(bookDoc, { hidden: false });
   };
+  
+  const updateRating = async (id, rating) => { 
+    const bookDoc = doc(booksCollection, id); 
+    await updateDoc(bookDoc, { rating }); 
+  };
+
+  const toggleEdit = (book) => { 
+    book.isEditing = !book.isEditing;
+  if (!book.isEditing){
+    updateRating(book.id, book.tempRating); // update the rating when editing is done
+  } };
 
   // Step 6: Return the state and actions
   return {
     newBookTitle,
     newAuthor,
     newImageUrl,
+    newRating,
     books,
     addBook,
     hideBook,
    unhideBook,
-    
+    updateRating,
+    toggleEdit,
   };
 };
   

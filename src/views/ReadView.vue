@@ -21,6 +21,7 @@
       v-model="newImageUrl"
       placeholder="Add an image URL"
     />
+    <input type="number" v-model="newRating" min="0" max="5" placeholder="Rate" />
     <!-- Button to add the book -->
     <button class="btn_addBook" @click="addBook()">Add Book</button>
   </div>
@@ -35,8 +36,15 @@
           <img v-if="book.imageUrl" :src="book.imageUrl" alt="Book cover" class="book-cover" />
           <strong>Title:</strong> {{ book.title }}<br>
           <strong>Author:</strong> {{ book.author }}
-        <!-- Delete button -->
-        <button class="btn_deleteBook" @click="hideBook(book.id)">Delete</button>
+          <strong>Rating:</strong> 
+          <span v-if="!book.isEditing">{{ book.rating }}</span> 
+            <select v-else v-model="book.tempRating">
+               <option v-for="n in 6" :key="n" :value="n-1">{{ n-1 }}</option> 
+            </select>
+            <div class="button-group">
+              <button class="btn_editBook" @click="toggleEdit(book)">{{ book.isEditing ? 'Save' : 'Edit' }}</button>
+              <button class="btn_deleteBook" @click="hideBook(book.id)">Delete</button>
+            </div>
       </div>
 
 
@@ -58,7 +66,9 @@ const {
   addBook,
   hideBook,
   newImageUrl,
-
+  newRating,
+  
+  toggleEdit,
 } = useBooks();
 
 
@@ -126,9 +136,9 @@ strong {
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
-  margin-left: 25%;
+  margin-left: 20%;
   background-color: #ffffff;
-  width: 50%;
+  width: 60%;
 
 }
 .book-cover {
@@ -138,18 +148,26 @@ strong {
   border-radius: 5px;
 }
 
+.button-group{
+  display: flex;
+  gap:10px;
+  margin-top: 20%;
+}
 
+.btn_editBook,
 .btn_deleteBook {
   padding: 10px ;
-  margin-top: 20%;
+  
   border-radius: 5px;
   border: none;
   background-color: rosybrown;
   color: white;
   cursor: pointer;
 }
+.btn_editBook:hover,
 .btn_deleteBook:hover {
   background-color: grey;
 }
+
 </style>
  
