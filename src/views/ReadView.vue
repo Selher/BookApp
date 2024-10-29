@@ -22,7 +22,7 @@
       placeholder="Add an image URL"
     />
     <!-- Button to add the book -->
-    <button class="btn_addBook" @click="addBook">Add Book</button>
+    <button class="btn_addBook" @click="addBook()">Add Book</button>
   </div>
 
   <h1 class="add-h1">See All</h1>

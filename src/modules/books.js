@@ -33,7 +33,7 @@ export const books = () => {
   });
 
   // Step 5: Add a new book to Firestore
-  const addBook = async (newAuthor, newBookTitle, newImageUrl) => {
+  const addBook = async () => {
     if (newBookTitle.value.trim() === '' || newAuthor.value.trim() === '' || newImageUrl.value.trim() ==='') return;
 
     await addDoc(booksCollection, {
@@ -56,7 +56,7 @@ export const books = () => {
     const bookDoc = doc(booksCollection, id);
     await updateDoc(bookDoc, { hidden: false });
   };
-  
+
   // Step 6: Return the state and actions
   return {
     newBookTitle,
