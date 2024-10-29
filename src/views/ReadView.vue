@@ -16,7 +16,11 @@
       v-model="newAuthor"
       placeholder="Add an author"
     />
-
+    <input
+      type="text"
+      v-model="newImageUrl"
+      placeholder="Add an image URL"
+    />
     <!-- Button to add the book -->
     <button class="btn_addBook" @click="addBook">Add Book</button>
   </div>
@@ -25,10 +29,14 @@
 
   
       <!-- Display the list of books -->
-      <div class="book-card" v-for="book in books" :key="book.id">
-        <img v-if="book.imageUrl" :src="book.imageUrl" alt="Book cover" class="book-cover" />
-        <strong>Title:</strong> {{ book.title }}<br>
-        <strong>Author:</strong> {{ book.author }}
+      <div class="book-card" v-for="book in visibleBooks" :key="book.id">
+        
+          <strong>Book</strong>
+          <img v-if="book.imageUrl" :src="book.imageUrl" alt="Book cover" class="book-cover" />
+          <strong>Title:</strong> {{ book.title }}<br>
+          <strong>Author:</strong> {{ book.author }}
+        <!-- Delete button -->
+        <button class="btn_deleteBook" @click="hideBook(book.id)">Delete</button>
       </div>
 
 
@@ -38,7 +46,7 @@
 </template>
 
 <script setup>
-
+import { computed } from 'vue';
 import { books as useBooks  } from '../modules/books.js';
 
 
@@ -47,12 +55,15 @@ const {
   books,
   newBookTitle,
   newAuthor,
-  
-  addBook
+  addBook,
+  hideBook,
+  newImageUrl,
+
 } = useBooks();
 
-// Add a new ref for image URL in `addBook` function
-// const newImageUrl = ref(''); // Commented out to avoid redeclaration
+
+const visibleBooks = computed(() => books.value.filter(book => !book.hidden));
+
 
 
 </script>
@@ -72,8 +83,6 @@ const {
   margin: 20px auto;
   padding: 20px;
   width: 50%;
-  border: 1px solid;
-  border-radius: 10px;
   display: flex;
   justify-content: center;
  
@@ -92,33 +101,34 @@ input {
   color: white;
   cursor: pointer;
 }
+.btn_addBook:hover {
+  background-color: grey;
+}
 
 /* Styling for the Book List Component */
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
 
+
+strong {
+  font-weight: bold;
+  font-size: large;
+  margin: 10px;
+  padding: 10px;
+  
 }
-.book-list {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
+
 
 .book-card {
   display: flex;
   align-items: center;
   justify-content:center;
-  border: 2px solid #ddd;
+  
+  border: 2px solid #000000;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
-  background-color: #f9f9f9;
- 
+  margin-left: 25%;
+  background-color: #ffffff;
+  width: 50%;
 
 }
 .book-cover {
@@ -126,6 +136,20 @@ ul {
   height: auto;
   margin-right: 15px;
   border-radius: 5px;
+}
+
+
+.btn_deleteBook {
+  padding: 10px ;
+  margin-top: 20%;
+  border-radius: 5px;
+  border: none;
+  background-color: rosybrown;
+  color: white;
+  cursor: pointer;
+}
+.btn_deleteBook:hover {
+  background-color: grey;
 }
 </style>
  
