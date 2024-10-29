@@ -43,6 +43,7 @@ export const books = () => {
       author: newAuthor.value,
       imageUrl: newImageUrl.value.trim() || null,
       rating:newRating.value,
+      location:'TBRView',
       hidden: false,
     });
 
@@ -72,6 +73,11 @@ export const books = () => {
     updateRating(book.id, book.tempRating); // update the rating when editing is done
   } };
 
+  const moveBook = async (id, newLocation) => {
+     const bookDoc = doc(booksCollection, id); 
+     await updateDoc(bookDoc, { location: newLocation });
+     };
+
   // Step 6: Return the state and actions
   return {
     newBookTitle,
@@ -84,6 +90,7 @@ export const books = () => {
    unhideBook,
     updateRating,
     toggleEdit,
+    moveBook,
   };
 };
   

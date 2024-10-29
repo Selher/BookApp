@@ -1,7 +1,7 @@
 <template>
   
   
-   <h1 class="add-h1">Your Read Books</h1>
+   <h1 class="add-h1">Read Books</h1>
     <p class="add-p">Add a Book</p>
 
     <!-- Input fields for adding a new book -->
@@ -72,7 +72,7 @@ const {
 } = useBooks();
 
 
-const visibleBooks = computed(() => books.value.filter(book => !book.hidden));
+const visibleBooks = computed(() => books.value.filter(book => book.location === 'ReadView' && !book.hidden));
 
 
 
