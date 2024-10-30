@@ -1,11 +1,8 @@
 <template>
   
   
-   <h1 class="add-h1">Read Books</h1>
+  <h1 class="add-h1">Read Books</h1>
  
-
-
-
   
       <!-- Display the list of books -->
       <div class="book-card" v-for="book in visibleBooks" :key="book.id">
@@ -34,11 +31,7 @@
               <button class="btn_deleteBook" @click="hideBook(book.id)">Delete</button>
             </div>
           
-      </div>
-
- 
-
-   
+      </div> 
  
 </template>
 
@@ -49,11 +42,8 @@ import { books as useBooks  } from '../modules/books.js';
 // Get the data and methods from the books module
 const {
   books,
-  
   hideBook,
-  
   toggleEdit,
-  
 } = useBooks();
 
 
@@ -65,135 +55,124 @@ const visibleBooks = computed(() => books.value.filter(book => book.location ===
 
 <style scoped>
 
-.add-h1 {
-  text-align: center;
-  font-size: 35px;
-  margin-top: 20px;
-}
-.add-p{
-  text-align: center;
-  font-size: 20px;
-}
-.add-form {
-  margin: 20px auto;
-  padding: 20px;
-  width: 50%;
-  display: flex;
-  justify-content: center;
- 
-}
-.book-details-inputs,
-.book-extra-inputs {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  margin-right: 20px;
-}
+    .add-h1 {
+      text-align: center;
+      font-size: 35px;
+      margin-top: 20px;
+    }
+    
+    .book-details-inputs,
+    .book-extra-inputs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      margin-right: 20px;
+    }
 
-.book-details-inputs input,
-.book-extra-inputs input,
-.book-extra-inputs textarea {
-  width: 100%;
-  margin-bottom: 10px;
- 
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+    .book-details-inputs input,
+    .book-extra-inputs input,
+    .book-extra-inputs textarea {
+      width: 100%;
+      margin-bottom: 10px;
+    
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
 
 
-textarea {
- 
-  height: 80px;
-}
-.button-container{
-align-self: flex-start;
-}
-.btn_addBook {
+    textarea {
+    
+      height: 80px;
+    }
+    .button-container{
+    align-self: flex-start;
+    }
+    .btn_addBook {
 
-  padding: 5px 10px ;
-  border-radius: 5px;
-  border: none;
-  background-color: rosybrown;
-  color: white;
-  cursor: pointer;
-}
-.btn_addBook:hover {
-  background-color: grey;
-}
+      padding: 5px 10px ;
+      border-radius: 5px;
+      border: none;
+      background-color: rosybrown;
+      color: white;
+      cursor: pointer;
+    }
+    .btn_addBook:hover {
+      background-color: grey;
+    }
 
-/* Styling for the Book List Component */
-
-
-strong {
-  font-weight: bold;
-  font-size: large;
-  margin: 10px;
-  padding: 10px;
-  
-}
+    
 
 
-.book-card {
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  
-  border: 2px solid #000000;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  margin-left: 20%;
-  background-color: #ffffff;
-  width: 60%;
+    strong {
+      font-weight: bold;
+      font-size: large;
+      margin: 10px;
+      padding: 10px;
+      
+    }
 
-}
-.book-cover {
-  width: 100px;
-  height: auto;
-  margin-right: 15px;
-  border-radius: 5px;
-}
-.book-details{
-  flex:1;
-}
-.book-description {
-  margin-top: 8px; /* Plads mellem forfatter og beskrivelse */
-  padding: 8px;
-  
-}
 
-.book-description strong {
-  font-weight: bold;
-  
-}
+    .book-card {
+      display: flex;
+      align-items: center;
+      justify-content:center;
+      
+      border: 2px solid #000000;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      margin-left: 20%;
+      background-color: #ffffff;
+      width: 60%;
 
-.book-description p {
-  margin: 5px 0 0;
-  
-}
-.button-group{
-  display: flex;
-  gap:10px;
-  margin-top: 20%;
-}
+    }
+    .book-cover {
+      width: 100px;
+      height: auto;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+    .book-details{
+      flex:1;
+    }
+    .book-description {
+      margin-top: 8px; 
+      padding: 8px;
+      
+    }
 
-.btn_editBook,
-.btn_deleteBook {
-  padding: 10px ;
-  
-  border-radius: 5px;
-  border: none;
-  background-color: rosybrown;
-  color: white;
-  cursor: pointer;
-}
-.btn_editBook:hover,
-.btn_deleteBook:hover {
-  background-color: grey;
-}
+    .book-description strong {
+      font-weight: bold;
+      
+    }
+
+    .book-description p {
+      margin: 5px 0 0;
+      
+    }
+    .button-group{
+      display: flex;
+      gap:10px;
+      margin-top: 20%;
+    }
+
+    .btn_editBook,
+    .btn_deleteBook {
+      padding: 10px ;
+      
+      border-radius: 5px;
+      border: none;
+      background-color: rosybrown;
+      color: white;
+      cursor: pointer;
+    }
+    .btn_editBook:hover,
+    .btn_deleteBook:hover {
+      background-color: grey;
+    }
 
 </style>
  

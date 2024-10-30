@@ -2,48 +2,43 @@
 <template>
   <main>
   
-    
-    <div class="container">
-  <div class="image-container">
-    <img src="../assets/front-page.jpg" alt="" class="img-fluid">
-    <div class="overlay-header">Welcome to BookTalk</div>
-    <div class="overlay-text">Scroll down to login</div>
-  </div>
-</div>
-
-<div class="login-container">
-    <h2>LogIn</h2>
-    <form @submit.prevent="loginUser">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          v-model="email"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="password"
-          required
-        />
-      </div>
-      <button class="login-btn" v-if="!user" @click="login(email, password)">Login</button>
-        <button class="login-btn" v-if="user" @click="logout">Logout</button>
-        <p v-if="user">Logged in as: {{ user.email }}</p>
-    </form>
-    <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
-  </div>
-
-      <div>
         
+      <div class="container">
+        <div class="image-container">
+          <img src="../assets/front-page.jpg" alt="" class="img-fluid">
+          <div class="overlay-header">Welcome to BookTalk</div>
+          <div class="overlay-text">Scroll down to login</div>
+        </div>
       </div>
-    
- 
+
+    <div class="login-container">
+        <h2>LogIn</h2>
+        <form @submit.prevent="loginUser">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    v-model="email"
+                    required
+                  />
+              </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                v-model="password"
+                required
+              />
+            </div>
+
+              <button class="login-btn" v-if="!user" @click="login(email, password)">Login</button>
+              <button class="login-btn" v-if="user" @click="logout">Logout</button>
+              <p v-if="user">Logged in as: {{ user.email }}</p>
+        </form>
+        <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
+      </div> 
   
 
   </main>
@@ -61,10 +56,10 @@ const { user, login, logout, email, password, errorMessage } = logIn()
 <style scoped>
   .image-container {
       position: relative;
-      width: 100%; /* Adjust width as needed */
+      width: 100%; 
     }
     .image-container img {
-      width: 100%; /* Ensure the image fits the container */
+      width: 100%; 
       height: auto;
     }
     .overlay-header {

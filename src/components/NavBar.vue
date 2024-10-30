@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
-/* Hover effect for routerlinks */
+
 .nav-link {
     color: black; 
 }
@@ -53,7 +53,7 @@ import { RouterLink } from 'vue-router'
     text-decoration: border; 
 }
 
-/* Center the routerlinks*/
+
 .navbar-nav {
     flex:0.85;
     justify-content: center; 

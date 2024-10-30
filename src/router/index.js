@@ -40,7 +40,7 @@ const router = createRouter({
   ]
 })
 
-// Router guard der tjekker e-mailadressen
+// Router guard that checks email and auth status
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
@@ -52,15 +52,15 @@ router.beforeEach((to, from, next) => {
       // Hvis ruten kræver en bestemt e-mail, tjekker vi den
       const allowEmail = to.meta.allowEmail;
       if (allowEmail && user.email !== allowEmail) {
-        next('/'); // Hvis brugeren ikke har den tilladte e-mail, send dem til startsiden
+        next('/'); // hvis user doesn't have the correct email send them to the home page
       } else {
-        next(); // Brugeren har adgang, send dem videre til destinationen
+        next(); // user is logged in and has the correct email send them to their destination
       }
     } else {
-      next('/'); // Hvis brugeren ikke er logget ind, send dem til startside
+      next('/'); // if user is not logged in send them to the home page
     }
   } else {
-    next(); // Hvis ruten ikke kræver auth, send brugeren videre
+    next(); // route does not require auth send them to their destination
   }
 });
 

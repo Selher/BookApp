@@ -6,12 +6,10 @@ import router from "@/router";
 
 export const logIn = () => {
   const user = ref(null);
-
-
   const email = ref('');
   const password = ref('');
   const errorMessage = ref('');
-
+  
   const login = async (email, password) => {
      try { 
       const userCredential = await signInWithEmailAndPassword(auth, email, password); 
