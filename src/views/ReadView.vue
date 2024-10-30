@@ -2,31 +2,9 @@
   
   
    <h1 class="add-h1">Read Books</h1>
-    <p class="add-p">Add a Book</p>
+ 
 
-    <!-- Input fields for adding a new book -->
-    <div class="add-form">
-    <input
-      type="text"
-      v-model="newBookTitle"
-      placeholder="Add a new book"
-    />
-    <input
-      type="text"
-      v-model="newAuthor"
-      placeholder="Add an author"
-    />
-    <input
-      type="text"
-      v-model="newImageUrl"
-      placeholder="Add an image URL"
-    />
-    <input type="number" v-model="newRating" min="0" max="5" placeholder="Rate" />
-    <!-- Button to add the book -->
-    <button class="btn_addBook" @click="addBook()">Add Book</button>
-  </div>
 
-  <h1 class="add-h1">See All</h1>
 
   
       <!-- Display the list of books -->
@@ -34,20 +12,31 @@
         
           <strong>Book</strong>
           <img v-if="book.imageUrl" :src="book.imageUrl" alt="Book cover" class="book-cover" />
-          <strong>Title:</strong> {{ book.title }}<br>
-          <strong>Author:</strong> {{ book.author }}
-          <strong>Rating:</strong> 
-          <span v-if="!book.isEditing">{{ book.rating }}</span> 
-            <select v-else v-model="book.tempRating">
-               <option v-for="n in 6" :key="n" :value="n-1">{{ n-1 }}</option> 
-            </select>
+
+          <div class="book-details">
+            <strong>Title:</strong> {{ book.title }}<br>
+            <strong>Author:</strong> {{ book.author }}
+            <strong>Rating:</strong> 
+            <span v-if="!book.isEditing">{{ book.rating }}</span> 
+              <select v-else v-model="book.tempRating">
+                <option v-for="n in 6" :key="n" :value="n-1">{{ n-1 }}</option> 
+              </select>
+          </div>
+
+          <div class="book-description">
+            <strong>Description:</strong><br> 
+            <p v-if="!book.isEditing">{{ book.description }}</p>
+            <textarea v-else v-model="book.tempDescription"></textarea>
+          </div>
+
             <div class="button-group">
               <button class="btn_editBook" @click="toggleEdit(book)">{{ book.isEditing ? 'Save' : 'Edit' }}</button>
               <button class="btn_deleteBook" @click="hideBook(book.id)">Delete</button>
             </div>
+          
       </div>
 
-
+ 
 
    
  
@@ -57,18 +46,14 @@
 import { computed } from 'vue';
 import { books as useBooks  } from '../modules/books.js';
 
-
 // Get the data and methods from the books module
 const {
   books,
-  newBookTitle,
-  newAuthor,
-  addBook,
+  
   hideBook,
-  newImageUrl,
-  newRating,
   
   toggleEdit,
+  
 } = useBooks();
 
 
@@ -97,14 +82,38 @@ const visibleBooks = computed(() => books.value.filter(book => book.location ===
   justify-content: center;
  
 }
-input {
-  margin-right: 10px;
+.book-details-inputs,
+.book-extra-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  margin-right: 20px;
+}
+
+.book-details-inputs input,
+.book-extra-inputs input,
+.book-extra-inputs textarea {
+  width: 100%;
+  margin-bottom: 10px;
+ 
+  padding: 8px;
   border-radius: 5px;
-  border: 1px solid;
+  border: 1px solid #ccc;
+}
+
+
+
+textarea {
+ 
+  height: 80px;
+}
+.button-container{
+align-self: flex-start;
 }
 .btn_addBook {
 
-  padding: 10px ;
+  padding: 5px 10px ;
   border-radius: 5px;
   border: none;
   background-color: rosybrown;
@@ -147,7 +156,24 @@ strong {
   margin-right: 15px;
   border-radius: 5px;
 }
+.book-details{
+  flex:1;
+}
+.book-description {
+  margin-top: 8px; /* Plads mellem forfatter og beskrivelse */
+  padding: 8px;
+  
+}
 
+.book-description strong {
+  font-weight: bold;
+  
+}
+
+.book-description p {
+  margin: 5px 0 0;
+  
+}
 .button-group{
   display: flex;
   gap:10px;

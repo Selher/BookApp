@@ -13,13 +13,21 @@ export const logIn = () => {
   const errorMessage = ref('');
 
   const login = async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
+     try { 
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); 
+      const user = userCredential.user;
+
+      // Tjek brugerens e-mail og omdiriger baseret på den
+      if (user.email === "admin@admin.com") {
+        router.push('/tbr'); // Admin har adgang til alle templates
+      } else {
+        router.push('/bookshelf'); // Almindelige brugere ser kun Bookshelf
+      } 
+    } catch (error) { 
+      console.log(error.message); 
+      errorMessage.value = error.message; 
     } 
-    catch (error) {
-      console.log(error.message)
-    }
-  }
+  };
   
   const logout = async () => {
     try {
@@ -45,3 +53,4 @@ export const logIn = () => {
     errorMessage
   }
 }
+

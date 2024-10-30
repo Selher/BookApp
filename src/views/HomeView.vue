@@ -6,7 +6,7 @@
     <div class="container">
   <div class="image-container">
     <img src="../assets/front-page.jpg" alt="" class="img-fluid">
-    <div class="overlay-header">Welcome to BookEase</div>
+    <div class="overlay-header">Welcome to BookTalk</div>
     <div class="overlay-text">Scroll down to login</div>
   </div>
 </div>

@@ -8,7 +8,7 @@
         <a class="navbar-brand" href="#">
                     <img src="../assets/bookshelf.png"  width="50" height="48">
                 </a>
-        <a class="navbar-brand fs-2" style="color:white" href="#">BookEase</a>
+        <a class="navbar-brand fs-2" style="color:white" href="#">BookTalk</a>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -21,7 +21,9 @@
                     <li class="nav-item">
                     <RouterLink class="nav-link" to="/tbr">TBR</RouterLink>
                      </li>
-                   
+                     <li class="nav-item">
+                    <RouterLink class="nav-link" to="/bookshelf">Bookshelf</RouterLink>
+                     </li>
             
                 </ul>
             

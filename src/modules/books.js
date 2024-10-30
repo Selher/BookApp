@@ -8,6 +8,7 @@ export const books = () => {
   const newAuthor = ref('');
   const newImageUrl = ref('');
   const newRating = ref(0);
+  const newDescription = ref('');
 
   // Step 2: Create a ref to store the list of books
   const books = ref([]);
@@ -27,6 +28,7 @@ export const books = () => {
           ...doc.data(), // Spread operator to merge the id and document data
          isEditing: false, // add isediting property status
          tempRating: doc.data().rating, // temporary rating to for editing
+         tempDescription: doc.data().description // temporary description for editing
         }))
         
      
@@ -43,6 +45,7 @@ export const books = () => {
       author: newAuthor.value,
       imageUrl: newImageUrl.value.trim() || null,
       rating:newRating.value,
+      description: newDescription.value,
       location:'TBRView',
       hidden: false,
     });
@@ -51,6 +54,7 @@ export const books = () => {
     newAuthor.value = '';
     newImageUrl.value = '';
     newRating.value = 0;
+    newDescription.value = '';
   };
   const hideBook = async (id) => {
     const bookDoc = doc(booksCollection, id);
@@ -66,11 +70,16 @@ export const books = () => {
     const bookDoc = doc(booksCollection, id); 
     await updateDoc(bookDoc, { rating }); 
   };
+  const updateDescription = async (id, description) => { 
+    const bookDoc = doc(booksCollection, id); 
+    await updateDoc(bookDoc, { description }); 
+  };
 
   const toggleEdit = (book) => { 
     book.isEditing = !book.isEditing;
   if (!book.isEditing){
     updateRating(book.id, book.tempRating); // update the rating when editing is done
+    updateDescription(book.id, book.tempDescription);
   } };
 
   const moveBook = async (id, newLocation) => {
@@ -89,6 +98,7 @@ export const books = () => {
     hideBook,
    unhideBook,
     updateRating,
+    updateDescription,
     toggleEdit,
     moveBook,
   };

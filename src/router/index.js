@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import { onAuthStateChanged, getAuth } from 'firebase/auth'
+import TBRView from '../views/TBRView.vue'
+import ReadView from '../views/ReadView.vue'
+import BookshelfView from '../views/BookshelfView.vue'
+import { getAuth } from 'firebase/auth'
 
 
 const router = createRouter({
@@ -17,38 +20,48 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/TBRView.vue'),
-      meta: { requiresAuth:true }
+      component: TBRView,
+      meta: { requiresAuth:true, allowEmail: 'admin@admin.com' }
     },
 
     {
       path: '/read',
       name: 'read',
 
-      component: () => import('../views/ReadView.vue'),
-      meta: { requiresAuth:true }
+      component: ReadView,
+      meta: { requiresAuth:true, allowEmail: 'admin@admin.com'}
+    },
+    {
+      path: '/bookshelf',
+      name: 'bookshelf',
+      component: BookshelfView,
+      meta: { requiresAuth:true, }
     }
   ]
 })
 
+// Router guard der tjekker e-mailadressen
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if(requiresAuth) {
-    onAuthStateChanged(auth, (user) => {
-      if(user) {
-        next();
+  if (requiresAuth) {
+    const user = auth.currentUser;
+
+    if (user) {
+      // Hvis ruten kræver en bestemt e-mail, tjekker vi den
+      const allowEmail = to.meta.allowEmail;
+      if (allowEmail && user.email !== allowEmail) {
+        next('/'); // Hvis brugeren ikke har den tilladte e-mail, send dem til startsiden
+      } else {
+        next(); // Brugeren har adgang, send dem videre til destinationen
       }
-      else {
-        next('/');
-      }
-    }) 
+    } else {
+      next('/'); // Hvis brugeren ikke er logget ind, send dem til startside
+    }
+  } else {
+    next(); // Hvis ruten ikke kræver auth, send brugeren videre
   }
-  else {
-    next();
-  } 
-}
-)
+});
 
 export default router
